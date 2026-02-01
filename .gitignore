@@ -1,0 +1,28 @@
+# Données du serveur (ne pas commit)
+data/
+backups/
+plugins/*.jar
+
+# Secrets (ne JAMAIS commit)
+.env
+panel/node_modules/
+
+# Fichiers de cache
+*.log
+*.log.gz
+crash-reports/
+logs/
+
+# Fichiers temporaires
+*.tmp
+*.bak
+*.swp
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db

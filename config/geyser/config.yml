@@ -1,0 +1,53 @@
+# Configuration GeyserMC
+# Permet aux joueurs Bedrock de rejoindre le serveur Java
+
+bedrock:
+  # Adresse d'écoute pour les joueurs Bedrock
+  address: 0.0.0.0
+  # Port Bedrock (par défaut: 19132)
+  port: 19132
+  # MOTD affiché aux joueurs Bedrock
+  motd1: "Serveur Cross-Play"
+  motd2: "Java & Bedrock"
+  # Nom du serveur dans la liste
+  server-name: "MC Server"
+
+remote:
+  # Adresse du serveur Java (localhost car même conteneur)
+  address: 127.0.0.1
+  # Port du serveur Java
+  port: 25565
+  # Type d'authentification (offline = mode cracké)
+  auth-type: offline
+
+# Préfixe pour les joueurs Bedrock (pour les distinguer)
+# Les joueurs Bedrock auront un "." devant leur pseudo
+floodgate-key-file: key.pem
+
+# Autoriser les joueurs Bedrock à voir les skins Java
+allow-third-party-capes: true
+allow-third-party-ears: false
+
+# Afficher les coordonnées aux joueurs Bedrock
+show-coordinates: true
+
+# Distance de rendu pour Bedrock
+emote-offhand-workaround: disabled
+
+# Cache des skins
+cache-images: 0
+
+# Permettre la connexion même si le skin ne charge pas
+allow-custom-skulls: true
+
+# Activer le proxy protocol si derrière un proxy
+enable-proxy-protocol: false
+
+# Paramètres avancés
+max-players: 10
+force-resource-packs: false
+xbox-achievements-enabled: false
+
+# Debug
+debug-mode: false
+general-thread-pool: 32

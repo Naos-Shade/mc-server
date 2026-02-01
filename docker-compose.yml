@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  minecraft:
+    container_name: mc-server
+    build: .
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    ports:
+      - "25565:25565"      # Port Java
+      - "19132:19132/udp"  # Port Bedrock (Geyser)
+    volumes:
+      - ./data:/server/data
+      - ./backups:/server/backups
+      - ./config:/server/config
+    environment:
+      - EULA=true
+      - MIN_RAM=2G
+      - MAX_RAM=4G
+      - TZ=Europe/Paris
+    healthcheck:
+      test: ["CMD", "mc-health"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+    networks:
+      - mc-network
+
+  whitelist-panel:
+    container_name: mc-whitelist-panel
+    build: ./panel
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - RCON_HOST=minecraft
+      - RCON_PORT=25575
+      - RCON_PASSWORD=${RCON_PASSWORD:-ChangeMe_SecurePassword123}
+      - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH}
+      - SESSION_SECRET=${SESSION_SECRET:-change-this-secret-in-production}
+    depends_on:
+      - minecraft
+    networks:
+      - mc-network
+
+networks:
+  mc-network:
+    driver: bridge

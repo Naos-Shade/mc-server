@@ -1,0 +1,84 @@
+# Configuration AuthMe Reloaded
+# Authentification pour serveur en mode offline (cracké)
+
+DataSource:
+  # Type de base de données (SQLite par défaut, simple et efficace)
+  backend: SQLITE
+  mySQLHost: 127.0.0.1
+  mySQLPort: '3306'
+  mySQLUsername: authme
+  mySQLPassword: '12345'
+  mySQLDatabase: authme
+  mySQLTablename: authme
+
+settings:
+  sessions:
+    # Activer les sessions (ne pas redemander le mdp à chaque connexion)
+    enabled: true
+    # Durée de la session en minutes
+    timeout: 43200  # 30 jours
+
+  registration:
+    # Forcer l'inscription
+    force: true
+    # Type d'inscription (PASSWORD = mot de passe requis)
+    type: PASSWORD
+    # Nombre de comptes par IP (0 = illimité)
+    maxRegPerIp: 3
+    # Empêcher les pseudos avec caractères spéciaux
+    allowedPasswordRegex: '[a-zA-Z0-9_]*'
+
+  # Restrictions avant connexion
+  restrictions:
+    # Autoriser les commandes avant login
+    allowCommands: []
+    # Temps max pour se connecter (en secondes)
+    timeout: 60
+    # Téléporter au spawn avant login
+    teleportToSpawnOnJoin: true
+    # Bloquer les mouvements avant login
+    allowMovement: false
+    # Bloquer le chat avant login
+    allowChat: false
+    # Cacher l'inventaire avant login
+    hideInventory: true
+
+  security:
+    # Nombre max de tentatives de login
+    maxLoginTry: 5
+    # Temps d'attente après échecs (en secondes)
+    tempbanLength: 480
+    # Algorithme de hashage (SHA256 = sécurisé et rapide)
+    passwordHash: SHA256
+    # Longueur minimale du mot de passe
+    minPasswordLength: 6
+    # Longueur maximale du mot de passe
+    maxPasswordLength: 30
+
+  # Compatibilité avec Floodgate (joueurs Bedrock)
+  # Les joueurs Bedrock avec préfixe "." sont auto-authentifiés
+  floodgate:
+    autoLogin: true
+
+# Messages personnalisés
+messages:
+  language: fr
+
+# Hooks avec d'autres plugins
+Hooks:
+  # Désactiver les messages "Player joined"
+  hideJoinMessage: true
+  hideLeaveMessage: true
+  # Réactiver après login
+  showJoinMessageAfterLogin: true
+  showLeaveMessageAfterQuit: true
+
+# Protection
+Protection:
+  # Activer la protection anti-bot
+  enableProtection: true
+  # Délai entre les connexions de la même IP
+  antiBot:
+    enabled: true
+    sensibility: 5
+    duration: 60
